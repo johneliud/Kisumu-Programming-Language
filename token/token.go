@@ -6,32 +6,31 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	// Identifiers + literals
-	IDENT = "IDENT" // add, foobar, x, y, ...
-	INT   = "INT"   // 1343456
+	IDENT = "IDENT"
+	INT   = "INT"
 
 	// Operators
 	ASSIGN   = "="
 	PLUS     = "+"
 	MINUS    = "-"
-	BANG     = "!"
+	NOT     = "!"
 	ASTERISK = "*"
 	SLASH    = "/"
 
-	LT = "<"
-	GT = ">"
+	LESS = "<"
+	GREATER = ">"
 
-	EQ     = "=="
-	NOT_EQ = "!="
+	EQUAL     = "=="
+	NOT_EQUAL = "!="
 
 	// Delimiters
 	COMMA     = ","
 	SEMICOLON = ";"
 
-	LPAREN = "("
-	RPAREN = ")"
-	LBRACE = "{"
-	RBRACE = "}"
+	LEFT_PARENTHESIS = "("
+	RIGHT_PARENTHESIS = ")"
+	LEFT_BRACE = "{"
+	RIGHT_BRACE = "}"
 
 	// Keywords
 	FUNC 	 = "FUNCTION"
