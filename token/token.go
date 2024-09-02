@@ -6,7 +6,7 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	IDENT = "IDENT"
+	IDENTIFIER = "IDENTIFIER"
 	INT   = "INT"
 
 	// Operators
@@ -25,7 +25,7 @@ const (
 
 	// Delimiters
 	COMMA     = ","
-	SEMICOLON = ";"
+	SEMI_COLON = ";"
 
 	LEFT_PARENTHESIS = "("
 	RIGHT_PARENTHESIS = ")"
@@ -61,5 +61,5 @@ func LookupIdent(ident string) TokenType {
 	if tok, ok := keywords[ident]; ok {
 		return tok
 	}
-	return IDENT
+	return IDENTIFIER
 }
