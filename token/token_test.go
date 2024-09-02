@@ -21,8 +21,8 @@ import (
 
 	func TestLookupIdentHandlesEmptyStringInput(t *testing.T) {
 		result := LookupIdent("")
-		if result != IDENT {
-			t.Errorf("LookupIdent(\"\") = %v; want %v", result, IDENT)
+		if result != IDENTIFIER {
+			t.Errorf("LookupIdent(\"\") = %v; want %v", result, IDENTIFIER)
 		}
 	}
 	
