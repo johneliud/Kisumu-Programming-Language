@@ -9,7 +9,6 @@ const (
 	IDENTIFIER = "IDENTIFIER"
 	INT   = "INT"
 
-	// Operators
 	ASSIGN   = "="
 	PLUS     = "+"
 	MINUS    = "-"
@@ -23,7 +22,6 @@ const (
 	EQUAL     = "=="
 	NOT_EQUAL = "!="
 
-	// Delimiters
 	COMMA     = ","
 	SEMI_COLON = ";"
 
@@ -32,7 +30,6 @@ const (
 	LEFT_BRACE = "{"
 	RIGHT_BRACE = "}"
 
-	// Keywords
 	FUNC 	 = "FUNCTION"
 	VAR      = "VAR"
 	TRUE     = "TRUE"
