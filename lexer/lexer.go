@@ -13,3 +13,14 @@ func New(input string) *Lexer {
 	l.readChar()
 	return l
 }
+
+// readChar will read the current character in the input
+func (l *Lexer) readChar() {
+	if l.readPosition >= len(l.input) {
+		l.ch = 0
+	} else {
+		l.ch = l.input[l.readPosition]
+	}
+	l.position = l.readPosition
+	l.readPosition++
+}
