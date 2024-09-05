@@ -12,7 +12,7 @@ import (
 		}
 	
 		for ident, expectedToken := range keywords {
-			result := LookupIdent(ident)
+			result := LookupIdentifier(ident)
 			if result != expectedToken {
 				t.Errorf("LookupIdent(%s) = %v; want %v", ident, result, expectedToken)
 			}
@@ -20,7 +20,7 @@ import (
 	}
 
 	func TestLookupIdentHandlesEmptyStringInput(t *testing.T) {
-		result := LookupIdent("")
+		result := LookupIdentifier("")
 		if result != IDENTIFIER {
 			t.Errorf("LookupIdent(\"\") = %v; want %v", result, IDENTIFIER)
 		}
