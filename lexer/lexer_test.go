@@ -25,7 +25,12 @@ if (5 < 10) {
 }
 
 10 == 10;
-10 != 9;`
+10 != 9;
+"foobar"
+"foo bar"
+[1, 2];
+{"foo": "bar"}
+`
 
 	tests := []struct {
 		expectedType    token.TokenType
@@ -109,6 +114,21 @@ if (5 < 10) {
 		{token.NOT_EQUAL, "!="},
 		{token.INT, "9"},
 		{token.SEMI_COLON, ";"},
+		{token.STRING, "foobar"},
+		{token.STRING, "foo bar"},
+
+		{token.LEFT_BRACKET, "["},
+		{token.INT, "1"},
+		{token.COMMA, ","},
+		{token.INT, "2"},
+		{token.RIGHT_BRACKET, "]"},
+		{token.SEMI_COLON, ";"},
+
+		{token.LEFT_BRACE, "{"},
+		{token.STRING, "foo"},
+		{token.COLON, ":"},
+		{token.STRING, "bar"},
+		{token.RIGHT_BRACE, "}"},
 
 		{token.EOF, ""},
 	}
