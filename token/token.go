@@ -29,6 +29,7 @@ const (
 
 	COMMA      = ","
 	SEMI_COLON = ";"
+	COLON      = ":"
 
 	LEFT_PARENTHESIS  = "("
 	RIGHT_PARENTHESIS = ")"
@@ -42,6 +43,10 @@ const (
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
+
+	STRING        = "STRING"
+	LEFT_BRACKET  = "["
+	RIGHT_BRACKET = "]"
 )
 
 var keywords = map[string]TokenType{
