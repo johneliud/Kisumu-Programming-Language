@@ -9,14 +9,12 @@ type Lexer struct {
 	ch           byte
 }
 
-// New will create a new Lexer instance
 func New(input string) *Lexer {
 	l := &Lexer{input: input}
 	l.readChar()
 	return l
 }
 
-// readChar will read the current character in the input
 func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
 		l.ch = 0
@@ -27,7 +25,6 @@ func (l *Lexer) readChar() {
 	l.readPosition++
 }
 
-// NextToken will return the next token in the input
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
@@ -77,13 +74,22 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.LEFT_BRACE, l.ch)
 	case '}':
 		tok = newToken(token.RIGHT_BRACE, l.ch)
+	case '"':
+		tok.Type = token.STRING
+		tok.Literal = l.readString()
+	case '[':
+		tok = newToken(token.LEFT_BRACKET, l.ch)
+	case ']':
+		tok = newToken(token.RIGHT_BRACKET, l.ch)
+	case ':':
+		tok = newToken(token.COLON, l.ch)
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
 	default:
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
-			tok.Type = token.LookupIdent(tok.Literal)
+			tok.Type = token.LookupIdentifier(tok.Literal)
 			return tok
 		} else if isDigit(l.ch) {
 			tok.Type = token.INT
@@ -98,12 +104,22 @@ func (l *Lexer) NextToken() token.Token {
 	return tok
 }
 
-// newToken will create a new token from a source code
+func (l *Lexer) readString() string {
+	position := l.position + 1
+	for {
+		l.readChar()
+
+		if l.ch == '"' || l.ch == 0 {
+			break
+		}
+	}
+	return l.input[position:l.position]
+}
+
 func newToken(tokenType token.TokenType, ch byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(ch)}
 }
 
-// readIdentifier will read an identifier
 func (l *Lexer) readIdentifier() string {
 	position := l.position
 	for isLetter(l.ch) {
@@ -112,12 +128,10 @@ func (l *Lexer) readIdentifier() string {
 	return l.input[position:l.position]
 }
 
-// isLetter will check if the current character is a letter
 func isLetter(ch byte) bool {
 	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_'
 }
 
-// readNumber will read a number
 func (l *Lexer) readNumber() string {
 	position := l.position
 	for isDigit(l.ch) {
@@ -126,19 +140,16 @@ func (l *Lexer) readNumber() string {
 	return l.input[position:l.position]
 }
 
-// isDigit will check if the current character is a digit
 func isDigit(ch byte) bool {
 	return '0' <= ch && ch <= '9'
 }
 
-// skipWhiteSpace will skip any whitespace
 func (l *Lexer) skipWhiteSpace() {
 	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
 		l.readChar()
 	}
 }
 
-// peekChar will return the next character in the input
 func (l *Lexer) peekChar() byte {
 	if l.readPosition >= len(l.input) {
 		return 0
