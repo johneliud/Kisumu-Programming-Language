@@ -1,12 +1,15 @@
 package token
 
+// TokenType defines the type for representing different token types in the language.
 type TokenType string
 
+// Token struct represents a lexical token with its type and literal value.
 type Token struct {
 	Type    TokenType
 	Literal string
 }
 
+// Constants representing the types of tokens.
 const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
@@ -49,6 +52,7 @@ const (
 	RIGHT_BRACKET = "]"
 )
 
+// maps keywords in the language to their respective token types.
 var keywords = map[string]TokenType{
 	"func":   FUNCTION,
 	"var":    VAR,
@@ -59,6 +63,7 @@ var keywords = map[string]TokenType{
 	"return": RETURN,
 }
 
+// Checks if the given identifier is a keyword, and returns the corresponding token type. If it's not a keyword, it returns the IDENTIFIER token type.
 func LookupIdentifier(identifier string) TokenType {
 	tok, ok := keywords[identifier]
 	if ok {
