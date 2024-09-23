@@ -10,7 +10,6 @@ type Lexer struct {
 	ch           byte
 }
 
-
 // Initializes a new Lexer instance with the input string and reads the first character.
 func New(input string) *Lexer {
 	l := &Lexer{input: input}

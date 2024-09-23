@@ -19,7 +19,7 @@ func main() {
 	if err != nil {
 		fmt.Printf("Failed to get current user: %s\n", err)
 	}
-	
+
 	fmt.Printf("Hello %s! Welcome to Kisumu-Programming-Language\n\n", user.Username)
 	repl.Start(os.Stdout)
 }
