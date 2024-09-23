@@ -157,7 +157,6 @@ func TestStringLiteralExpression(t *testing.T) {
 	}
 }
 
-/*
 func TestParsingArrayLiterals(t *testing.T) {
 	input := "[1, 2 * 2, 3 + 3]"
 
@@ -178,9 +177,8 @@ func TestParsingArrayLiterals(t *testing.T) {
 	testIntegerLiteral(t, array.Elements[0], 1)
 	testInfixExpression(t, array.Elements[1], 2, "*", 2)
 	testInfixExpression(t, array.Elements[2], 3, "+", 3)
-}*/
+}
 
-/*
 func TestParsingIndexExpressions(t *testing.T) {
 	input := "myArray[1 + 1]"
 
@@ -202,7 +200,7 @@ func TestParsingIndexExpressions(t *testing.T) {
 	if !testInfixExpression(t, indexExp.Index, 1, "+", 1) {
 		return
 	}
-}*/
+}
 
 func testVarStatement(t *testing.T, s ast.Statement, name string) bool {
 	if s.TokenLiteral() != "var" {
@@ -534,7 +532,6 @@ func TestIfElseExpression(t *testing.T) {
 	}
 }
 
-/*
 func TestFunctionLiteralParsing(t *testing.T) {
 	input := `func(x, y) { x + y; }`
 
@@ -574,9 +571,8 @@ func TestFunctionLiteralParsing(t *testing.T) {
 	}
 
 	testInfixExpression(t, bodyStmt.Expression, "x", "+", "y")
-}*/
+}
 
-/*
 func TestFunctionParameterParsing(t *testing.T) {
 	tests := []struct {
 		input          string
@@ -604,7 +600,7 @@ func TestFunctionParameterParsing(t *testing.T) {
 			testLiteralExpression(t, function.Parameters[i], ident)
 		}
 	}
-}*/
+}
 
 func TestCallExpressionParsing(t *testing.T) {
 	input := "add(1, 2 * 3, 4 + 5);"
@@ -641,7 +637,6 @@ func TestCallExpressionParsing(t *testing.T) {
 	testInfixExpression(t, exp.Arguments[2], 4, "+", 5)
 }
 
-/*
 func TestCallExpressionParameterParsing(t *testing.T) {
 	tests := []struct {
 		input        string
@@ -669,9 +664,8 @@ func TestCallExpressionParameterParsing(t *testing.T) {
 			testLiteralExpression(t, callExp.Arguments[i], arg)
 		}
 	}
-}*/
+}
 
-/*
 func TestParsingHashLiteralStringKeys(t *testing.T) {
 	input := `{"one": 1, "two": 2, "three": 3}`
 
@@ -704,9 +698,8 @@ func TestParsingHashLiteralStringKeys(t *testing.T) {
 		expectedValue := expected[literal.String()]
 		testIntegerLiteral(t, value, expectedValue)
 	}
-}*/
+}
 
-/*
 func TestParsingHashLiteralBooleanKeys(t *testing.T) {
 	input := `{true: 1, false: 2}`
 
@@ -738,9 +731,8 @@ func TestParsingHashLiteralBooleanKeys(t *testing.T) {
 		expectedValue := expected[literal.Value]
 		testIntegerLiteral(t, value, expectedValue)
 	}
-}*/
+}
 
-/*
 func TestParsingHashLiteralIntegerKeys(t *testing.T) {
 	input := `{1: 1, 2: 2, 3: 3}`
 
@@ -773,9 +765,8 @@ func TestParsingHashLiteralIntegerKeys(t *testing.T) {
 		expectedValue := expected[int(literal.Value)]
 		testIntegerLiteral(t, value, expectedValue)
 	}
-}*/
+}
 
-/*
 func TestParsingEmptyHashLiteral(t *testing.T) {
 	input := `{}`
 
@@ -793,9 +784,8 @@ func TestParsingEmptyHashLiteral(t *testing.T) {
 	if len(hash.Pairs) != 0 {
 		t.Errorf("hash.Pairs has wrong length. got=%d", len(hash.Pairs))
 	}
-}*/
+}
 
-/*
 func TestParsingHashLiteralsWithExpressions(t *testing.T) {
 	input := `{"one": 0 + 1, "two": 10 - 8, "three": 15 / 5}`
 
@@ -838,7 +828,7 @@ func TestParsingHashLiteralsWithExpressions(t *testing.T) {
 		}
 		testFunc(value)
 	}
-}*/
+}
 
 func checkParserErrors(t *testing.T, p *Parser) {
 	errors := p.Errors()
