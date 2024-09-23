@@ -4,37 +4,55 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"os"
 
+	"github.com/johneliud/Kisumu-Programming-Language/evaluator"
 	"github.com/johneliud/Kisumu-Programming-Language/lexer"
-	"github.com/johneliud/Kisumu-Programming-Language/token"
+	"github.com/johneliud/Kisumu-Programming-Language/object"
+	"github.com/johneliud/Kisumu-Programming-Language/parser"
 )
 
-const PROMPT = "->"
+func Start(output io.Writer) {
+	sourceFile, err := os.Open("source-code.ksm")
+	if err != nil {
+		fmt.Println("Error opening file!", err)
+		return
+	}
+	defer sourceFile.Close()
 
-func Start(input io.Reader, output io.Writer) {
-	/*
-	   ksmFile, err := os.Open("./source-file.ksm")
-	   if err != nil {
-	   fmt.Printf("Failed to open source file: %s\n", err)
-	   os.Exit(1)
-	   }
-	   defer ksmFile.Close()
-	*/
-	scanner := bufio.NewScanner(input)
+	scanner := bufio.NewScanner(sourceFile)
+	env := object.NewEnvironment()
 
 	for {
-		fmt.Print(PROMPT)
 		scanned := scanner.Scan()
 		if !scanned {
 			return
 		}
+
 		line := scanner.Text()
 		l := lexer.New(line)
+		p := parser.New(l)
+		program := p.ParseProgram()
 
-		// Loops through each token produced by the lexer until EOF is reached
-		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
-			fmt.Printf("%+v\n", tok)
+		if len(p.Errors()) != 0 {
+			printParserErrors(output, p.Errors())
+			continue
+		}
+
+		evaluated := evaluator.Eval(program, env)
+
+		if evaluated != nil {
+			io.WriteString(output, evaluated.Inspect())
+			io.WriteString(output, "\n")
 		}
 	}
+}
 
+func printParserErrors(output io.Writer, errors []string) {
+	io.WriteString(output, "An unexpected error just occurred\n")
+	io.WriteString(output, " parser errors:\n")
+
+	for _, msg := range errors {
+		io.WriteString(output, "\t"+msg+"\n")
+	}
 }
