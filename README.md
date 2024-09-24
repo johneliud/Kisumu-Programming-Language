@@ -45,12 +45,6 @@ An additional programming environment, [Go](https://go.dev/doc/install) is requi
 - var isTrue = true;
 ```
 
-
-### Declaring Functions
-```bash
-func(a, b) { a + b; };
-```
-
 ### Printing Result
 ```bash
 print()
@@ -73,19 +67,40 @@ This command helps in evaluating what is present in your source code.
 
 ## Examples
 
-As standard with every other programming language, let's start with having a program that prints `Hello World!` on the standard output.
-1. Declare a variable `message` and assign the string `Hello World!` to it.
-    ```bash
-    var message = "Hello World!";
-    ```
+- As standard with every other programming language, let's start with having a program that prints `Hello World!` on the standard output.
+    1. Declare a variable `message` and assign the string `Hello World!` to it.
+        ```bash
+        var message = "Hello World!";
+        ```
 
-2. Print variable `message`
-    ```bash
-    print(message);
-    ```
+    2. Print variable `message`
+        ```bash
+        print(message);
+        ```
 
-3. Run the program
-    ```bash
-    go run .
-    ```
+    3. Run the program
+        ```bash
+        go run .
+        ```
 
+- Program to find the sum of a given set of numbers.
+    1. Declare a variable `a` and assign the value `2` to it and variable `b` and assign the value `10` to it.
+        ```bash
+        var a = 2;
+        var b = 10;
+        ```
+
+    2. Declare a variable `c` and assign it to be the result of `a` and `b`.
+        ```bash
+        var c = a + b;
+        ```
+
+    3. Print the value of `c`
+        ```bash
+        print(c)
+        ```
+
+    4. Run the program
+        ```bash
+        go run .
+        ```
