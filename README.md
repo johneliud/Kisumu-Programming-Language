@@ -32,17 +32,17 @@ An additional programming environment, [Go](https://go.dev/doc/install) is requi
 
 ### Declaring Integer Types
 ```bash
-- var age = 1;
+var age = 1;
 ```
 
 ### Declaring String Types
 ```bash
-- var name = "Kisumu";
+var name = "Kisumu";
 ```
 
 ### Declaring Boolean Types
 ```bash
-- var isTrue = true;
+var isTrue = true;
 ```
 
 ### Printing Result
