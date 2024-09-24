@@ -65,7 +65,7 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerPrefix(token.FALSE, p.parseBoolean)
 	p.registerPrefix(token.LEFT_PARENTHESIS, p.parseGroupedExpression)
 	p.registerPrefix(token.IF, p.parseIfExpression)
-	p.registerPrefix(token.FUNCTION, p.parseFunctionLiteral)
+	// p.registerPrefix(token.FUNCTION, p.parseFunctionLiteral)
 	p.registerPrefix(token.STRING, p.parseStringLiteral)
 
 	p.infixParseFns = make(map[token.TokenType]infixParseFn)
@@ -77,7 +77,7 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerInfix(token.NOT_EQUAL, p.parseInfixExpression)
 	p.registerInfix(token.LESS_THAN, p.parseInfixExpression)
 	p.registerInfix(token.GREATER_THAN, p.parseInfixExpression)
-	p.registerInfix(token.LEFT_PARENTHESIS, p.parseCallExpression)
+	// p.registerInfix(token.LEFT_PARENTHESIS, p.parseCallExpression)
 
 	return p
 }
@@ -197,52 +197,6 @@ func (p *Parser) parseBlockStatement() *ast.BlockStatement {
 		p.nextToken()
 	}
 	return block
-}
-
-func (p *Parser) parseFunctionLiteral() ast.Expression {
-	lit := &ast.FunctionLiteral{Token: p.currentToken}
-
-	if !p.expectPeek(token.LEFT_PARENTHESIS) {
-		return nil
-	}
-
-	lit.Parameters = p.parseFunctionParameters()
-
-	if !p.expectPeek(token.LEFT_BRACE) {
-		return nil
-	}
-	lit.Body = p.parseBlockStatement()
-	return lit
-}
-
-func (p *Parser) parseFunctionParameters() []*ast.Identifier {
-	identifiers := []*ast.Identifier{}
-
-	if p.peekTokenIs(token.RIGHT_PARENTHESIS) {
-		p.nextToken()
-		return identifiers
-	}
-	p.nextToken()
-	ident := &ast.Identifier{Token: p.currentToken, Value: p.currentToken.Literal}
-	identifiers = append(identifiers, ident)
-
-	for p.peekTokenIs(token.COMMA) {
-		p.nextToken()
-		p.nextToken()
-		ident := &ast.Identifier{Token: p.currentToken, Value: p.currentToken.Literal}
-		identifiers = append(identifiers, ident)
-	}
-
-	if !p.expectPeek(token.RIGHT_PARENTHESIS) {
-		return nil
-	}
-	return identifiers
-}
-
-func (p *Parser) parseCallExpression(function ast.Expression) ast.Expression {
-	exp := &ast.CallExpression{Token: p.currentToken, Function: function}
-	exp.Arguments = p.parseExpressionList(token.RIGHT_PARENTHESIS)
-	return exp
 }
 
 func (p *Parser) parseExpressionList(end token.TokenType) []ast.Expression {
