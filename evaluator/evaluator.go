@@ -39,8 +39,6 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 			return right
 		}
 		return evalInfixExpression(node.Operator, left, right)
-	case *ast.IfExpression:
-		return evalIfExpression(node, env)
 	case *ast.BlockStatement:
 		return evalBlockStatement(node, env)
 	case *ast.ReturnStatement:
@@ -57,24 +55,6 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 		env.Set(node.Name.Value, val)
 	case *ast.Identifier:
 		return evalIdentifier(node, env)
-	// case *ast.FunctionLiteral:
-	// 	params := node.Parameters
-	// 	body := node.Body
-	// 	return &object.Function{
-	// 		Parameters: params,
-	// 		Env:        env,
-	// 		Body:       body,
-	// 	}
-	// case *ast.CallExpression:
-	// 	function := Eval(node.Function, env)
-	// 	if isError(function) {
-	// 		return function
-	// 	}
-	// 	args := evalExpressions(node.Arguments, env)
-	// 	if len(args) == 1 && isError(args[0]) {
-	// 		return args[0]
-	// 	}
-	// 	return applyFunction(function, args)
 	case *ast.StringLiteral:
 		return &object.String{Value: node.Value}
 	}
@@ -203,35 +183,6 @@ func evalIntegerInfixExpression(operator string, left object.Object, right objec
 		return nativeBoolToBooleanObject(leftVal != rightVal)
 	default:
 		return newError("unknown operator: %s %s %s", left.Type(), operator, right.Type())
-	}
-}
-
-func evalIfExpression(ie *ast.IfExpression, env *object.Environment) object.Object {
-	condition := Eval(ie.Condition, env)
-
-	if isError(condition) {
-		return condition
-	}
-
-	if isTruthy(condition) {
-		return Eval(ie.Consequence, env)
-	} else if ie.Alternative != nil {
-		return Eval(ie.Alternative, env)
-	} else {
-		return NULL
-	}
-}
-
-func isTruthy(obj object.Object) bool {
-	switch obj {
-	case NULL:
-		return false
-	case TRUE:
-		return true
-	case FALSE:
-		return false
-	default:
-		return true
 	}
 }
 
