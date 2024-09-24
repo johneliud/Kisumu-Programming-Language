@@ -56,7 +56,7 @@ The program currently offers a file `source-code.ksm` where the user can write t
 
 **NOTE**: Every source code line written on the file should end with a `semi-colon`.
 
-## Running The Program
+### Running The Program
 
 Once you have written your source code on the `source-code.ksm`, open the terminal and type the command:
 ```bash
@@ -67,40 +67,63 @@ This command helps in evaluating what is present in your source code.
 
 ## Examples
 
-- As standard with every other programming language, let's start with having a program that prints `Hello World!` on the standard output.
-    1. Declare a variable `message` and assign the string `Hello World!` to it.
+1. As standard with every other programming language, let's start with having a program that prints `Hello World!` on the standard output.
+    - Declare a variable `message` and assign the string `Hello World!` to it.
         ```bash
         var message = "Hello World!";
         ```
 
-    2. Print variable `message`
+    - Print variable `message`
         ```bash
         print(message);
         ```
 
-    3. Run the program
+    - Run the program
         ```bash
         go run .
         ```
 
-- Program to find the sum of a given set of numbers.
-    1. Declare a variable `a` and assign the value `2` to it and variable `b` and assign the value `10` to it.
+2. Program to find the sum of a given set of numbers.
+    - Declare a variable `a` and assign the value `2` to it and variable `b` and assign the value `10` to it.
         ```bash
         var a = 2;
         var b = 10;
         ```
 
-    2. Declare a variable `c` and assign it to be the result of `a` and `b`.
+    - Declare a variable `c` and assign it to be the result of `a` and `b`.
         ```bash
         var c = a + b;
         ```
 
-    3. Print the value of `c`
+    - Print the value of `c`
         ```bash
         print(c)
         ```
 
-    4. Run the program
+    - Run the program
+        ```bash
+        go run .
+        ```
+
+3. String Concatenation
+
+    - Declare variable `a` and assign the value `Kisumu` to it. Declare another variable `b` and assign the value `Language` to it.
+        ```bash
+        var a = "Kisumu";
+        var b = "Language";
+        ```
+
+    - Declare variable `c` which will concatenate `a` and `b` with a space separation.
+        ```bash
+        var c = a + " " + b;
+        ```
+
+    - Print the value of `c`
+        ```bash
+        print(c)
+        ```
+
+    - Run the program.
         ```bash
         go run .
         ```
